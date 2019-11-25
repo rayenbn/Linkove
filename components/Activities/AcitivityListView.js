@@ -36,8 +36,8 @@ class AcitivityListView extends Component {
                         <View style={{ flex: 1, flexDirection: 'row'}}>
                             <Text style={{ flex: 4, fontSize: 14, fontWeight: 'bold', color: 'grey'}}>{this.props.name}</Text>
                            <View style={{ flex: 1}}>
-                                <TouchableOpacity transparent >
-                                    <Icon name="heart" style={{ fontSize: 18, color: '#DC1A72' }} />
+                                <TouchableOpacity transparent onPress={this.props.UpdateFavEvent}>
+                                    <Icon name="heart" style={{ fontSize: 18, color: (this.props.saved ? '#DC1A72' : '#fff') }} />
                                 </TouchableOpacity>
                             </View>
                         </View>

@@ -36,6 +36,7 @@ const mocks = [
       },
       saved: true,
       location: '中国，广州市，海珠区江南西路广义大厦1601',
+      city: '广州',
       distance: 4.5,
       departure_time: '9:00',
       duration: 4,
@@ -43,6 +44,7 @@ const mocks = [
       description: '此项志愿服务主要服务内容是教授儿童外语，以及照顾看管儿童，其对象的年龄是5-10岁，服务地点将会在教室内，服务时间大约4小时, 服务过程中有课间休息时间。每次服务前需要准备教学内容及课件，以及适当的教具，协助儿童更有效地学习外语。义工志愿者要求有爱心，热情积极，外语掌握程度为英语4级或以上。',
       rating: 4.3,
       reviews: 3212,
+      type: "PRIVATE ROOM - 2 BEDS",
       preview: 'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
       images: [
         'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
@@ -57,8 +59,9 @@ const mocks = [
         name: 'Lelia Chavez',
         avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
       },
-      saved: false,
+      saved: true,
       location: '中国，广州市，海珠区江南西路广义大厦1601',
+      city: '广州',
       distance: 4.5,
       departure_time: '9:00',
       duration: 4,
@@ -66,6 +69,7 @@ const mocks = [
       description: '此项志愿服务主要服务内容是教授儿童外语，以及照顾看管儿童，其对象的年龄是5-10岁，服务地点将会在教室内，服务时间大约4小时, 服务过程中有课间休息时间。每次服务前需要准备教学内容及课件，以及适当的教具，协助儿童更有效地学习外语。义工志愿者要求有爱心，热情积极，外语掌握程度为英语4级或以上。',
       rating: 4.3,
       reviews: 3212,
+      type: "PRIVATE ROOM - 2 BEDS",
       preview: 'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
       images: [
         'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
@@ -80,6 +84,7 @@ const mocks = [
       },
       saved: true,
       location: '中国，广州市，海珠区江南西路广义大厦1601',
+      city: '广州',
       distance: 4.5,
       departure_time: '9:00',
       duration: 4,
@@ -87,6 +92,7 @@ const mocks = [
       description: '此项志愿服务主要服务内容是教授儿童外语，以及照顾看管儿童，其对象的年龄是5-10岁，服务地点将会在教室内，服务时间大约4小时, 服务过程中有课间休息时间。每次服务前需要准备教学内容及课件，以及适当的教具，协助儿童更有效地学习外语。义工志愿者要求有爱心，热情积极，外语掌握程度为英语4级或以上。',
       rating: 4.3,
       reviews: 3212,
+      type: "PRIVATE ROOM - 2 BEDS",
       preview: 'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
       images: [
         'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
@@ -103,12 +109,14 @@ const mocks = [
       },
       saved: false,
       location: '中国，广州市，海珠区江南西路广义大厦1601',
+      city: '广州',
       distance: 4.5,
       departure_time: '9:00',
       duration: 4,
       title: '外语教学',
       description: '此项志愿服务主要服务内容是教授儿童外语，以及照顾看管儿童，其对象的年龄是5-10岁，服务地点将会在教室内，服务时间大约4小时, 服务过程中有课间休息时间。每次服务前需要准备教学内容及课件，以及适当的教具，协助儿童更有效地学习外语。义工志愿者要求有爱心，热情积极，外语掌握程度为英语4级或以上。',
       rating: 4.3,
+      type: "PRIVATE ROOM - 2 BEDS",
       reviews: 3212,
       preview: 'https://images.unsplash.com/photo-1458906931852-47d88574a008?auto=format&fit=crop&w=800&q=80',
       images: [
@@ -125,14 +133,14 @@ class Activities extends Component {
         this.scrollY = new Animated.Value(0)
 
         this.startHeaderHeight = 80
-        this.endHeaderHeight = 50
+        this.endHeaderHeight = 40
         if (Platform.OS == 'android') {
-            this.startHeaderHeight = 100 + StatusBar.currentHeight
-            this.endHeaderHeight = 70 + StatusBar.currentHeight
+            this.startHeaderHeight = 70 + StatusBar.currentHeight
+            this.endHeaderHeight = 40 + StatusBar.currentHeight
         }
 
         this.animatedHeaderHeight = this.scrollY.interpolate({
-            inputRange: [0, 50],
+            inputRange: [0, 40],
             outputRange: [this.startHeaderHeight, this.endHeaderHeight],
             extrapolate: 'clamp'
         })
@@ -149,11 +157,9 @@ class Activities extends Component {
         })
         this.animatedMarginTop = this.animatedHeaderHeight.interpolate({
             inputRange: [this.endHeaderHeight, this.startHeaderHeight],
-            outputRange: [50, 30],
+            outputRange: [40, 30],
             extrapolate: 'clamp'
         })
-
-
     }
 
     renderDots() {
@@ -251,31 +257,42 @@ class Activities extends Component {
         )
       }
 
+      // updateFavoriteStatus() {
+      //   this.setState(
+      //     {}
+      //   )
+      // }
+
     render() {
+      const { navigation } = this.props;
         return (
             <SafeAreaView style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>
-                    <Animated.View style={{ height: this.animatedHeaderHeight, backgroundColor: 'white', borderBottomWidth: 1, borderBottomColor: '#dddddd' }}>
+                    <Animated.View style={{ height: this.animatedHeaderHeight, 
+                                          backgroundColor: 'white', 
+                                          borderBottomWidth: 1, borderBottomColor: '#dddddd' }}>
              
                         <View style={{
                             flexDirection: 'row', padding: 10,
-                            backgroundColor: 'white', marginHorizontal: 20,
+                            backgroundColor: theme.colors.gray, marginHorizontal: 20,
                             shadowOffset: { width: 0, height: 0 }, alignItems: 'center',
                             shadowColor: 'black',
                             shadowOpacity: 0.2,
                             elevation: 1,
-                            marginTop: Platform.OS == 'android' ? 30 : null
+                            borderRadius: 12,
+                            marginTop: Platform.OS == 'android' ? 10 : null
                         }}>
                             <Icon name="ios-search" size={20} style={{ marginRight: 10 }} />
                             <TextInput
                                 underlineColorAndroid="transparent"
                                 placeholder="Try New Delhi"
                                 placeholderTextColor="grey" 
-                                style={{ fontWeight: '700', paddingLeft:15, backgroundColor: 'white' }}
+                                style={{ fontWeight: '700', paddingLeft:15, backgroundColor: theme.colors.gray, height: 20,padding: 0 }}
                             />
                         </View>
                         <Animated.View
-                            style={{ flexDirection: 'row', marginHorizontal: 20, position: 'relative', top: this.animatedTagTop, opacity: this.animatedOpacity }}
+                            style={{ flexDirection: 'row', marginHorizontal: 20, position: 'relative', 
+                            top: this.animatedTagTop, opacity: this.animatedOpacity }}
                         >
                             <MenuTags name="Guests" />
                             <MenuTags name="Dates" />
@@ -290,36 +307,29 @@ class Activities extends Component {
                             ]
                         )}
                     >
-                        {/* <View style={{ flex: 1, backgroundColor: 'white', paddingTop: 20 }}>
-                            <Text style={{ fontSize: 24, fontWeight: '700', paddingHorizontal: 20 }}>
-                                What can we help you find, Varun?
-                            </Text>
-
-                            <View style={{ height: 130, marginTop: 20 }}>
-                                <ScrollView
-                                    horizontal={true}
-                                    showsHorizontalScrollIndicator={false}
-                                >
-                                    <Category imageUri={require('./assets/3.jpg')}
-                                        name="Home"
-                                    />
-                                    <Category imageUri={require('./assets/9.jpg')}
-                                        name="Experiences"
-                                    />
-                                    <Category imageUri={require('./assets/8.jpg')}
-                                        name="Resturant"
-                                    />
-                                </ScrollView>
-                            </View>
-                            
-                        </View> */}
                         {this.renderActivities()}
-                        <View style={{ marginTop: 40 }}>
+                        <View style={{ marginTop: 30 }}>
                             <Text style={{ fontSize: 24, fontWeight: '700', paddingHorizontal: 20 }}>
                                 Homes around the world
                             </Text>
+                            
                             <View style={{ paddingHorizontal: 20, marginTop: 20, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                                <Activity width={width}
+                            {this.props.destinations.map((data, i)=> {
+                              return (
+                                <TouchableOpacity activeOpacity={0.8} key={i} onPress={() => navigation.navigate('ActivityDetails', { activity: data })}>
+                                  <Activity  width={width}
+                                      // triggerParentUpdate={this.updateFavoriteStatus}
+                                      name={data.title}
+                                      type={data.type}
+                                      imageSource={data.id}
+                                      city={data.city}
+                                      saved={data.saved}
+                                  />
+                                </TouchableOpacity>
+                              )}
+                            )}
+                                
+                                {/* <Activity width={width}
                                     name="The Cozy Place"
                                     type="PRIVATE ROOM - 2 BEDS"
                                     imageSource="3"
@@ -332,21 +342,7 @@ class Activities extends Component {
                                     imageSource="1"
                                     city="广州"
                                     // rating={4}
-                                />
-                                <Activity width={width}
-                                    name="The Cozy Place"
-                                    type="PRIVATE ROOM - 2 BEDS"
-                                    imageSource="2"
-                                    city="广州"
-                                    // rating={4}
-                                />
-                                <Activity width={width}
-                                    name="The Cozy Place"
-                                    type="PRIVATE ROOM - 2 BEDS"
-                                    imageSource="4"
-                                    city="广州"
-                                    // rating={4}
-                                />
+                                /> */}
 
                             </View>
                         </View>
@@ -357,20 +353,27 @@ class Activities extends Component {
                                 <Text style={{ fontWeight: '100', marginTop: 10 }}>
                                     A new selection of homes verified for quality & comfort
                                 </Text>
-                                <TouchableOpacity  onPress={() => this.props.navigation.navigate('ActivityDetails')}>
+                                {this.props.destinations.map((data, i)=> {
+                                  return (
+                                    <TouchableOpacity activeOpacity={0.8} key={i} onPress={() => navigation.navigate('ActivityDetails', { activity: data })}>
+                                      <ActivityLarge  width={width}
+                                          title={data.title}
+                                          desc={data.description}
+                                          imageSource={data.id}
+                                          city={data.city}
+                                          saved={data.saved}
+                                      />
+                                    </TouchableOpacity>
+                                  )}
+                                )}
+                                {/* <TouchableOpacity  onPress={() => this.props.navigation.navigate('ActivityDetails')}>
                                 <ActivityLarge width={width}
-                                    title="和德国德国"
+                                    title="和德国德国aaa"
                                     desc="和恢复合肥符合和废话覅欸合肥二hi覅和夫人回房后人"
                                     imageSource="1"
                                     city="广东，广州"
                                 />
-                                </TouchableOpacity>
-                                <ActivityLarge width={width}
-                                    title="和德国德国"
-                                    desc="和恢复合肥符合和废话覅欸合肥二hi覅和夫人回房后人"
-                                    imageSource="3"
-                                    city="广东，广州"
-                                />
+                                </TouchableOpacity> */}
                                 
                         </View>
                         
@@ -414,10 +417,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         paddingBottom: 15,
+        marginTop: 15,
       },
       destination: {
         width: width - (theme.sizes.padding * 2),
-        height: width * 0.6,
+        height: width * 0.5,
         marginHorizontal: theme.sizes.margin,
         paddingHorizontal: theme.sizes.padding,
         paddingVertical: theme.sizes.padding * 0.66,
@@ -429,7 +433,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: theme.sizes.padding,
         paddingVertical: theme.sizes.padding / 2,
         bottom: 20,
-        left: (width - (theme.sizes.padding * 5)) / (Platform.OS === 'ios' ? 3.2 : 3),
+        left: (width - (theme.sizes.padding * 10)) / (Platform.OS === 'ios' ? 3.2 : 3),
         backgroundColor: theme.colors.white,
         width: width - (theme.sizes.padding * 4),
       },

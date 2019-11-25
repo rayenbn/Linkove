@@ -8,38 +8,47 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 
 import { createStackNavigator,createBottomTabNavigator,createAppContainer } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { MenuProvider } from 'react-native-popup-menu';
 import Home from './screens/Home'
 import Saved from './screens/Saved'
 import Inbox from './screens/Inbox'
 import Activities from './screens/Activities'
 import Profile from './screens/Profile'
+import Article from './screens/Article'
+import NewsDetail from './screens/NewsDetail'
 
 export default class App extends React.Component {
   render() {
     return (
-      <AppContainer/>
+      <MenuProvider>
+        <AppContainer/>
+      </MenuProvider>
     );
   }
 }
-const ActivitiesStacNav = createStackNavigator({
-  Activities: {
-    screen: Activities,
+const NewsStacNav = createStackNavigator({
+  Home: {
+    screen: Home,
+    headerMode: 'none',
     navigationOptions: {
-      headerTitle: 'Activities',
+      // header : null  
+      headerTitle: 'Linkove',
     }
   },
-  ActivityDetails: {
-    screen: Inbox,
+  NewsDetails: {
+    screen: NewsDetail,
+    navigationOptions: {
+      headerTitle: 'Details',
+    }
   }
 },
 {
-  initialRouteName: 'Activities',
+  initialRouteName: 'Home',
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#f4511e',
-      
+      backgroundColor: '#fff',
     },
-    headerTintColor: '#fff',
+    headerTintColor: '#000',
     headerTitleStyle: {
       fontWeight: 'bold',
       alignSelf: 'center',
@@ -48,12 +57,41 @@ const ActivitiesStacNav = createStackNavigator({
     },
   },
 }
-
+)
+const ActivitiesStacNav = createStackNavigator({
+  Activities: {
+    screen: Activities,
+    headerMode: 'none',
+    navigationOptions: {
+      header : null  
+      // headerTitle: 'Activities',
+    }
+  },
+  ActivityDetails: {
+    screen: Article,
+  },
+},
+{
+  initialRouteName: 'Activities',
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: '#fff',
+      
+    },
+    headerTintColor: '#000',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      alignSelf: 'center',
+      textAlign: 'center',
+      flex: 1
+    },
+  },
+}
 )
 const TabNavigator = createBottomTabNavigator({
   
   Home: {
-    screen: Home,
+    screen: NewsStacNav,
     navigationOptions: {
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => (
@@ -101,7 +139,15 @@ const TabNavigator = createBottomTabNavigator({
       )
     }
   }
-}, {
+},
+{
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
+      return {
+        header: null,
+        // headerTitle: routeName
+      };
+    },
     tabBarOptions: {
       activeTintColor: 'red',
       inactiveTintColor: 'grey',
@@ -116,8 +162,42 @@ const TabNavigator = createBottomTabNavigator({
     }
   })
 
+  const DashboardStacNav = createStackNavigator({
+    DashboardTabNavigator: TabNavigator
+  //   Activities: {
+  //     screen: Activities,
+  //     headerMode: 'none',
+  //     navigationOptions: {
+  //       header : null  
+  //       // headerTitle: 'Activities',
+  //     }
+  //   },
+  //   ActivityDetails: {
+  //     screen: Article,
+  //   },
+  //   NewsDetails: {
+  //     screen: News,
+  //   }
+  // },
+  // {
+  //   initialRouteName: 'DashboardTabNavigator',
+  //   defaultNavigationOptions: {
+  //     headerStyle: {
+  //       backgroundColor: '#fff',
+        
+  //     },
+  //     headerTintColor: '#000',
+  //     headerTitleStyle: {
+  //       fontWeight: 'bold',
+  //       alignSelf: 'center',
+  //       textAlign: 'center',
+  //       flex: 1
+  //     },
+  //   },
+  }
+  )
 
-const AppContainer= createAppContainer(TabNavigator);
+const AppContainer= createAppContainer(DashboardStacNav);
 
 const styles = StyleSheet.create({
   container: {

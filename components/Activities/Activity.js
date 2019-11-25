@@ -25,7 +25,7 @@ class Activity extends Component {
                         source={images[this.props.imageSource]} />
                          <View style={{ position: 'absolute', right: 5 , top: 5 }}>
                             <TouchableOpacity transparent >
-                                <Icon name="md-heart" style={{ color: '#DC1A72' }} />
+                                <Icon name="md-heart" style={{ color: (this.props.saved ? '#DC1A72' : '#fff') }} />
                             </TouchableOpacity>
                          </View>
                 </View> 

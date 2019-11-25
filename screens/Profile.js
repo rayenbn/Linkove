@@ -6,7 +6,8 @@ import {
     SafeAreaView,
     ScrollView,
     Image,
-    Dimensions
+    Dimensions,
+    TouchableOpacity
 } from "react-native";
 import HeaderCard from "../components/Profile/HeaderCard";
 import ProfileMenu from "../components/Profile/ProfileMenu";
@@ -28,11 +29,21 @@ class Profile extends Component {
                         <View style={{ top: -80 }}>
                             <HeaderCard width={width}/>
                             <View style={{ marginTop: 20 }}>
-                                <ProfileMenu cardText='我的义工体验'/>
-                                <ProfileMenu cardText='设置'/>
-                                <ProfileMenu cardText='邀请好友'/>
-                                <ProfileMenu cardText='帮助'/>
-                                <ProfileMenu cardText='反馈建议'/>
+                                <TouchableOpacity>
+                                    <ProfileMenu cardText='我的义工体验'/>
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <ProfileMenu cardText='设置'/>
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <ProfileMenu cardText='邀请好友'/>
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <ProfileMenu cardText='帮助'/>
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <ProfileMenu cardText='反馈建议'/>
+                                </TouchableOpacity>
                             </View>
                         </View>
                 </View>

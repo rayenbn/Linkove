@@ -14,10 +14,11 @@ class ActivityLarge extends Component {
 
             "1": require('../../screens/assets/4.jpg'),
             "2": require('../../screens/assets/6.jpg'),
-            "3": require('../../screens/assets/3.jpg')
+            "3": require('../../screens/assets/3.jpg'),
+            "4": require('../../screens/assets/8.jpg')
         }
         return (
-            <View style={{ width: this.props.width - 40, height: 300, marginTop: 20 }}>
+            <View style={{ width: this.props.width - 40, height: 300, marginTop: 30 }}>
                 <View style={{ flex: 2 }}>
                     <Image
                         style={{ flex: 1, height: null, width: null, resizeMode: 'cover', borderRadius: 5, borderWidth: 1, borderColor: '#dddddd' }}
@@ -25,7 +26,7 @@ class ActivityLarge extends Component {
                     />
                     <View style={{ position: 'absolute', right: 8 , top: 5 }}>
                         <TouchableOpacity transparent >
-                             <Icon name="md-heart" style={{ color: '#DC1A72' }} />
+                            <Icon name="md-heart" style={{ color: (this.props.saved ? '#DC1A72' : '#fff') }} />
                         </TouchableOpacity>
                     </View>
                    
@@ -35,8 +36,8 @@ class ActivityLarge extends Component {
                         <Text style={{ flex: 2, fontSize: 18, fontWeight: 'bold', color: '#DC1A72' }}>{this.props.title}</Text>
                         <Text style={{ flex: 1, fontSize: 14, color: 'grey'}}>{this.props.city}</Text>
                     </View>
-                    <View style={{ flex: 1, marginTop: 10 }}>
-                        <Text style={{ fontSize: 16 }}>{this.props.desc}</Text>
+                    <View style={{ flex: 1 }}>
+                        <Text style={{ fontSize: 16 }}>{this.props.desc.split('').slice(0, 30)}...</Text>
                     </View>
                 </View>
                 

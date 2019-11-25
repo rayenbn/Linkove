@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     avatar: {
       width: 55,
       height: 55,
-      borderRadius: theme.sizes.padding,
-      
+      borderRadius: 30,
     },
   });
